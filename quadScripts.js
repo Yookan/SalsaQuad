@@ -79,11 +79,33 @@ function results() {
   context.fillStyle="black";
   vX = -(b*1)/(2*a);
   vY = a*Math.pow(vX,2)+b*vX+c*1;
+  vY = vY.toFixed(1);
+  vX = vX.toFixed(1);
   context.beginPath();
   context.arc(vX,vY,5,0,6.28);
   context.fill();
+
   $("#vertex").text("Vertex is at (" + vX+","+vY+")");
   $("#vertexForm").text("Vertex Form is y = "+a+"(x-"+vX+")^2 + "+vY);
+  $("#yInt").text("The Y Intercept is at(0,"+c+")");
+
+// Y int circle
+context.beginPath();
+context.arc(w/2,h/2-c*k,5,0,6.28);
+context.fill();
+
+//vertext Circle
+context.beginPath();
+context.arc(w/2+vX*k,h/2-vY*k,5,0,6.28);
+context.fill();
+
+//sym Line
+context.setLineDash([5,10]);
+context.beginPath();
+context.moveTo(w/2+vX*k,5);
+context.lineTo(w/2+vX*k,h-5);
+context.stroke();
+context.setLineDash([0]);
 }  // close results()
 
 function solutions() {
@@ -158,6 +180,7 @@ function resetCanvas() {
   context.clearRect(0,0,w,h);
   grid();
   graphQuad();
+  results();
 } // end resetCanvas
 
 function doMouseMove(event) {
@@ -175,5 +198,3 @@ function doMouseMove(event) {
   context.fill(); 
   $("#point").text("Point on the curve: ("+pointX+","+pointY+")");
 }  // end doMouseMove
-
-
